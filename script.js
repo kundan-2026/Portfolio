@@ -103,26 +103,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Form Submission
-  const contactForm = document.getElementById("contactForm");
+  const scriptURL =
+    "https://script.google.com/macros/s/AKfycbxUaeMi56vmTjb5yvIUN4Q-jeeCp4clIHrnW0SrpcpDB8dQugAvgdP9lDd-Mhscqp6MIg/exec";
+  const form = document.forms["submit-to-google-sheet"];
+  const msg = document.getElementById("message-display");
 
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      // Get form values
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const subject = document.getElementById("subject").value;
-      const message = document.getElementById("message").value;
-
-      // Here you would typically send the form data to a server
-      // For this example, we'll just log it and show an alert
-      console.log({ name, email, subject, message });
-
-      alert("Thank you for your message! I will get back to you soon.");
-      contactForm.reset();
-    });
-  }
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    fetch(scriptURL, { method: "POST", body: new FormData(form) })
+      .then((response) => {
+        msg.innerHTML =
+          "Thank you for your message! I will get back to you soon.";
+        setTimeout(function () {
+          msg.innerHTML = " ";
+        }, 2000);
+        form.reset();
+      })
+      .catch((error) => console.error("Error!", error.message));
+  });
 
   // Active link highlighting
   const sections = document.querySelectorAll("section");

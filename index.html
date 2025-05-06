@@ -306,23 +306,23 @@
           <div class="project-image">
             <img src="images/elearninglogo.jpg" alt="Task Management App">
           </div>
+        </div>
+        <div class="project-content">
+          <h3>Task Management App</h3>
+          <p>Developed a Netflix clone enabling users to search and stream movies seamlessly, showcasing skills in
+            user-friendly design, responsive UI, and robust functionality.</p>
+          <div class="project-tech">
+            <span>Vue.js</span>
+            <span>Firebase</span>
+            <span>Tailwind CSS</span>
           </div>
-          <div class="project-content">
-            <h3>Task Management App</h3>
-            <p>Developed a Netflix clone enabling users to search and stream movies seamlessly, showcasing skills in
-              user-friendly design, responsive UI, and robust functionality.</p>
-            <div class="project-tech">
-              <span>Vue.js</span>
-              <span>Firebase</span>
-              <span>Tailwind CSS</span>
-            </div>
-            <div class="project-links">
-              <a href="#" target="_blank" class="btn btn-primary">Live Demo</a>
-              <a href="#" target="_blank" class="btn btn-secondary">Code</a>
-            </div>
+          <div class="project-links">
+            <a href="#" target="_blank" class="btn btn-primary">Live Demo</a>
+            <a href="#" target="_blank" class="btn btn-secondary">Code</a>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -353,23 +353,24 @@
             <!-- <a href="https://github.com/kundan-2026" target="_blank"><i class="fab fa-github"></i></a> -->
           </div>
         </div>
-        <form class="contact-form" id="contactForm">
+
+        <form class="contact-form" id="contactForm" name="submit-to-google-sheet">
           <div class="form-group">
-            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="text" id="name" name="Name" placeholder="Your Name" required>
           </div>
           <div class="form-group">
-            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="email" id="email" name="Email-id" placeholder="Your Email" required>
           </div>
           <div class="form-group">
-            <input type="text" id="subject" placeholder="Subject">
+            <input type="text" id="subject" name="Subject" placeholder="Subject">
           </div>
           <div class="form-group">
-            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+            <textarea id="message" rows="5" name="Message" placeholder="Your Message" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Send Message</button>
+
+          <div id="message-display"></div>
         </form>
-      </div>
-    </div>
   </section>
 
   <!-- Footer -->
