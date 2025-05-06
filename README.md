@@ -5,7 +5,7 @@
 A modern, responsive portfolio website showcasing my skills, projects, and experience as a Frontend Developer. Built with HTML, CSS, and JavaScript.
 
 ## 🔗 Live Demo
-[View Live Portfolio](https://kundan-kumar-portfolio.netlify.app/)
+[View Live Portfolio](https://kundan-2026.github.io/Portfolio/)
 
 ## ✨ Features
 
