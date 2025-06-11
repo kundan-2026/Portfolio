@@ -59,7 +59,7 @@ h3 {
   cursor: pointer;
   border: none;
   font-size: 1rem;
-  
+
 }
 
 .btn-primary {
@@ -720,13 +720,42 @@ h3 {
 }
 
 /* Projects Section */
+.projects-section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.projects-container-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  margin: 0 auto;
+}
+
 .projects-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  display: flex;
   gap: 30px;
+  padding: 10px 40px;
+  /* Equal padding on both sides */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.projects-container::-webkit-scrollbar {
+  display: none;
 }
 
 .project-card {
+  flex: 0 0 auto;
+  min-width: 300px;
+  max-width: 350px;
+  width: 100%;
+  scroll-snap-align: center;
   background-color: var(--card-bg);
   border-radius: 10px;
   overflow: hidden;
@@ -736,6 +765,42 @@ h3 {
 
 .project-card:hover {
   transform: translateY(-10px);
+}
+
+.project-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-nav-left {
+  left: 10px;
+}
+
+.project-nav-right {
+  right: 10px;
+}
+
+.projects-container-wrapper:hover .project-nav {
+  opacity: 1;
+}
+
+.project-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .project-image {
@@ -1027,6 +1092,17 @@ h3 {
     width: 100%;
     text-align: center;
   }
+
+  .project-card {
+    width: 280px;
+  }
+
+  .project-nav {
+    opacity: 0.7;
+    /* Always visible on mobile */
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1038,7 +1114,7 @@ h3 {
     font-size: 1.8rem;
   }
 
-  .projects-container {
-    grid-template-columns: 1fr;
+  .project-card {
+    width: 85vw;
   }
 }
