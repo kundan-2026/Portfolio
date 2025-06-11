@@ -196,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
       educationContent.classList.remove("active");
     });
   }
+
   // Pause marquee on hover
   const marquee = document.querySelector(".social-marquee-content");
   if (marquee) {
@@ -205,5 +206,106 @@ document.addEventListener("DOMContentLoaded", function () {
     marquee.addEventListener("mouseleave", function () {
       marquee.style.animationPlayState = "running";
     });
+  }
+
+  // Project Slider Navigation
+  const projectsContainer = document.querySelector(".projects-container");
+  const prevBtn = document.querySelector(".project-nav-left");
+  const nextBtn = document.querySelector(".project-nav-right");
+
+  if (projectsContainer && prevBtn && nextBtn) {
+    // Navigation click handlers
+    prevBtn.addEventListener("click", () => {
+      projectsContainer.scrollBy({
+        left: -350, // Scroll amount based on card width + gap
+        behavior: "smooth",
+      });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      projectsContainer.scrollBy({
+        left: 350, // Scroll amount based on card width + gap
+        behavior: "smooth",
+      });
+    });
+
+    // Touch and drag support
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    projectsContainer.addEventListener("mousedown", (e) => {
+      isDown = true;
+      startX = e.pageX - projectsContainer.offsetLeft;
+      scrollLeft = projectsContainer.scrollLeft;
+      projectsContainer.style.cursor = "grabbing";
+      projectsContainer.style.scrollBehavior = "auto";
+    });
+
+    projectsContainer.addEventListener("mouseleave", () => {
+      isDown = false;
+      projectsContainer.style.cursor = "grab";
+      projectsContainer.style.scrollBehavior = "smooth";
+    });
+
+    projectsContainer.addEventListener("mouseup", () => {
+      isDown = false;
+      projectsContainer.style.cursor = "grab";
+      projectsContainer.style.scrollBehavior = "smooth";
+    });
+
+    projectsContainer.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - projectsContainer.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed
+      projectsContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch events for mobile
+    projectsContainer.addEventListener("touchstart", (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX - projectsContainer.offsetLeft;
+      scrollLeft = projectsContainer.scrollLeft;
+      projectsContainer.style.scrollBehavior = "auto";
+    });
+
+    projectsContainer.addEventListener("touchend", () => {
+      isDown = false;
+      projectsContainer.style.scrollBehavior = "smooth";
+    });
+
+    projectsContainer.addEventListener("touchmove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.touches[0].pageX - projectsContainer.offsetLeft;
+      const walk = (x - startX) * 2;
+      projectsContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Hide arrows when at scroll extremes
+    const checkScrollPosition = () => {
+      const maxScroll =
+        projectsContainer.scrollWidth - projectsContainer.clientWidth;
+      if (projectsContainer.scrollLeft <= 10) {
+        prevBtn.style.opacity = "0";
+        prevBtn.style.pointerEvents = "none";
+      } else {
+        prevBtn.style.opacity = "1";
+        prevBtn.style.pointerEvents = "auto";
+      }
+
+      if (projectsContainer.scrollLeft >= maxScroll - 10) {
+        nextBtn.style.opacity = "0";
+        nextBtn.style.pointerEvents = "none";
+      } else {
+        nextBtn.style.opacity = "1";
+        nextBtn.style.pointerEvents = "auto";
+      }
+    };
+
+    projectsContainer.addEventListener("scroll", checkScrollPosition);
+    window.addEventListener("resize", checkScrollPosition);
+    checkScrollPosition(); // Initial check
   }
 });
